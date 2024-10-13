@@ -7,17 +7,70 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* AudiType Normal */
+@font-face {
+  font-family: "AudiType";
+  src: url("/fonts/AudiType-Normal_4.03.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* AudiType Bold */
+@font-face {
+  font-family: "AudiType";
+  src: url("/fonts/AudiType-Bold_4.03.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* AudiType Light */
+@font-face {
+  font-family: "AudiType";
+  src: url("/fonts/AudiType-WideLight_4.03.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* AudiType Italic */
+@font-face {
+  font-family: "AudiType";
+  src: url("/fonts/AudiType-Italic_4.03.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* AudiType Bold Italic */
+@font-face {
+  font-family: "AudiType";
+  src: url("/fonts/AudiType-BoldItalic_4.03.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* AudiType Extended Normal */
+@font-face {
+  font-family: "AudiType";
+  src: url("/fonts/AudiType-ExtendedNormal_4.03.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* AudiType Extended Bold */
+@font-face {
+  font-family: "AudiType";
+  src: url("/fonts/AudiType-ExtendedBold_4.03.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: "AudiType", sans-serif;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "AudiType", sans-serif;
 }
 
 @layer utilities {

@@ -11,6 +11,9 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        audi: ["AudiType", "sans-serif"], // Now 'audi' can be used in Tailwind classes
+      },
     },
   },
   plugins: [],
