@@ -5,11 +5,12 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import StepProgressBar from "./StepProgressBar";
-import StepContactDetails from "./StepContactDetails";
-import StepStart from "./StepStart";
-import StepSession from "./StepSession";
+import StepContactDetails from "./StepContactDetails"; // Step 3
+import StepStart from "./StepStart"; // Step 0
+import StepSession from "./StepSession"; // Step 1
 import Image from "next/image";
 
+// Dynamically import the GoogleReCaptchaProvider with SSR disabled
 const GoogleReCaptchaProvider = dynamic(
   () =>
     import("react-google-recaptcha-v3").then(
@@ -18,6 +19,7 @@ const GoogleReCaptchaProvider = dynamic(
   { ssr: false }
 );
 
+// Initial form data with all required fields
 const initialFormData = {
   brand: "",
   dealership: "",
@@ -28,9 +30,9 @@ const initialFormData = {
   phone: "",
   email: "",
   message: "",
-  contactMethod: [],
-  consent: true,
-  session: "", // Added session field
+  contactMethod: [], // Initialize as an empty array for multiple options
+  consent: false,
+  session: "", // Added session field for audiform.pia.ro
 };
 
 const FormContent = () => {
@@ -73,16 +75,20 @@ const FormContent = () => {
     setStep((prev) => prev - 1);
   };
 
+  // Validate form data before submission
   const validateFormData = () => {
     const requiredFields = [
       "firstName",
       "lastName",
       "phone",
       "email",
-      "session",
       "contactMethod",
       "consent",
     ];
+
+    // Include 'session' as a required field for 'audiform.pia.ro'
+    requiredFields.push("session");
+
     const errors = {};
 
     requiredFields.forEach((field) => {
@@ -90,7 +96,7 @@ const FormContent = () => {
         !formData[field] ||
         (Array.isArray(formData[field]) && formData[field].length === 0)
       ) {
-        errors[field] = "This field is required.";
+        errors[field] = "Acest câmp este obligatoriu.";
       }
     });
 
@@ -102,7 +108,7 @@ const FormContent = () => {
     e.preventDefault();
 
     if (!validateFormData()) {
-      alert("Please fill out all required fields.");
+      alert("Vă rugăm să completați toate câmpurile obligatorii.");
       return;
     }
 
@@ -145,10 +151,10 @@ const FormContent = () => {
 
       setFormSubmitted(true);
       setFormData(initialFormData);
-      setStep(3);
+      setStep(3); // Final step
       setErrors({});
       setTimeout(() => {
-        window.location.reload();
+        window.location.reload(); // This will refresh the page after 3 seconds
       }, 2000);
     } catch (error) {
       console.error("Form submission failed:", error);
@@ -191,7 +197,80 @@ const FormContent = () => {
 
   return (
     <div className="bg-white shadow-xl w-full max-w-lg">
-      {/* ... rest of your component */}
+      {/* Logo and header */}
+      <div className="-top-60 left-0 w-full overflow-hidden">
+        <div className="relative w-full h-[100px] overflow-hidden">
+          <div className="absolute inset-0 transform -translate-y-1/2">
+            <Image
+              src="/logos/audi_light.svg" // Path to your logo
+              alt="Audi Logo"
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
+        </div>
+        <div className="text-sm px-10 mb-5 text-left">
+          <h1
+            className="text-4xl font-bold font-audi"
+            style={{ fontWeight: 700 }}
+          >
+            Audi
+          </h1>
+          <h1 className="font-audi">Perfect sincronizat cu tine.</h1>
+        </div>
+      </div>
+
+      <StepProgressBar step={formSubmitted ? 3 : step} />
+
+      {formSubmitted ? (
+        <div className="text-center">
+          <h2 className="text-xl font-bold">
+            Formularul a fost trimis cu succes.
+          </h2>
+          <p>
+            Vă mulțumim! În cel mai scurt timp veți fi contactat de un coleg
+            specialist vânzări.
+          </p>
+        </div>
+      ) : (
+        <form onSubmit={handleFormSubmission}>
+          {renderStep()}
+          <div className="mt-4 flex justify-between">
+            {/* Back button */}
+            {step > 0 ? (
+              <button
+                type="button"
+                onClick={handlePrev}
+                className="px-4 py-2 bg-white m-6 w-28 text-black border border-black hover:bg-black hover:text-white"
+              >
+                Înapoi
+              </button>
+            ) : (
+              <div className="invisible px-4 py-2" />
+            )}
+            {/* Next button */}
+            {step > 0 && step < 2 && (
+              <button
+                type="button"
+                onClick={handleNext}
+                className="px-4 py-2 bg-black m-6 w-28 text-white hover:bg-gray-600"
+              >
+                Înainte
+              </button>
+            )}
+            {/* Submit button */}
+            {step === 2 && (
+              <button
+                type="submit"
+                className="px-4 py-2 bg-[#f50537] m-6 w-28 text-white hover:bg-white hover:text-black hover:border-black hover:border"
+                disabled={loading}
+              >
+                {loading ? "Se trimite..." : "Trimite"}
+              </button>
+            )}
+          </div>
+        </form>
+      )}
     </div>
   );
 };
