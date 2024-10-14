@@ -16,7 +16,7 @@ const StepSession = ({ formData, handleInputChange, onNext }) => {
                 : ""
             }`}
           >
-            <h3 className="text-lg font-light mb-4">{session.name}</h3>
+            <h3 className="text-base font-light mb-4">{session.name}</h3>
             <div className="flex flex-wrap justify-center gap-4 mb-4">
               {session.cars.map((car, index) => (
                 <div

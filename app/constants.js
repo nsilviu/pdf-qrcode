@@ -24,7 +24,7 @@ export const brands = [
 export const sessions = [
   {
     id: 1,
-    name: "14 October 2024 - 20 October 2024",
+    name: "14 Octombrie 2024 - 20 Octombrie 2024",
     cars: [
       { image: "/cars/a3.png", model: "Audi A3" },
       { image: "/cars/a5.png", model: "Audi A5" },
@@ -32,7 +32,7 @@ export const sessions = [
   },
   {
     id: 2,
-    name: "21 October 2024 - 27 October 2024",
+    name: "21 Octombrie 2024 - 27 Octombrie 2024",
     cars: [
       { image: "/cars/a3.png", model: "Audi A3" },
       { image: "/cars/a5.png", model: "Audi A5" },
@@ -40,7 +40,7 @@ export const sessions = [
   },
   {
     id: 3,
-    name: "28 October 2024 - 3 November 2024",
+    name: "28 Octombrie 2024 - 3 Noiembrie 2024",
     cars: [
       { image: "/cars/a3.png", model: "Audi A3" },
       { image: "/cars/a5.png", model: "Audi A5" },

@@ -196,16 +196,15 @@ const FormContent = () => {
   };
 
   return (
-    <div className="bg-white shadow-xl w-full max-w-lg">
+    <div className="bg-white shadow-xl w-full max-w-lg min-h-screen">
       {/* Logo and header */}
-      <div className="-top-60 left-0 w-full overflow-hidden">
-        <div className="relative w-full h-[100px] overflow-hidden">
-          <div className="absolute inset-0 transform -translate-y-1/2">
+      <div className="left-0 w-full overflow-hidden">
+        <div className="relative w-full h-[100px] ">
+          <div className="absolute inset-0 transform mb-10">
             <Image
               src="/logos/audi_light.svg" // Path to your logo
               alt="Audi Logo"
               layout="fill"
-              objectFit="contain"
             />
           </div>
         </div>
@@ -217,13 +216,16 @@ const FormContent = () => {
             Audi
           </h1>
           <h1 className="font-audi">Perfect sincronizat cu tine.</h1>
+          <h1 className="text-xs font-light text-left mt-10">
+            Punct test-drive Audi la ParkLake
+          </h1>
         </div>
       </div>
 
       <StepProgressBar step={formSubmitted ? 3 : step} />
 
       {formSubmitted ? (
-        <div className="text-center">
+        <div className="text-center p-5">
           <h2 className="text-xl font-bold">
             Formularul a fost trimis cu succes.
           </h2>

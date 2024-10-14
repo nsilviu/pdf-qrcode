@@ -21,7 +21,7 @@ export default function HomePage() {
           Porsche Inter Auto
         </h1>
       </div>
-      <div className="flex flex-col items-center justify-center min-h-screen px-2">
+      <div className="flex flex-col items-center justify-center px-2">
         <FormContainer />
       </div>
       <footer className="bg-gray-900 text-gray-400">

@@ -26,7 +26,7 @@ const StepContactDetails = ({
 
   return (
     <div className="mb-4 text-center">
-      <h1 className="text-xl pb-5">Date de contactare</h1>
+      <h1 className="text-xl pb-5 font-light">Date de contactare</h1>
       <div className="flex flex-col gap-4 p-5 items-center">
         <input
           type="text"
@@ -35,7 +35,7 @@ const StepContactDetails = ({
           value={formData.firstName}
           onChange={handleInputChange}
           required
-          className="p-2 border w-full md:w-80"
+          className="p-2 border w-full md:w-80 placeholder:text-xs placeholder:font-light"
         />
         <input
           type="text"
@@ -44,7 +44,7 @@ const StepContactDetails = ({
           value={formData.lastName}
           onChange={handleInputChange}
           required
-          className="p-2 border w-full md:w-80"
+          className="p-2 border w-full md:w-80 placeholder:text-xs placeholder:font-light"
         />
         <input
           type="tel"
@@ -55,7 +55,7 @@ const StepContactDetails = ({
           required
           pattern="\d{10}"
           title="Numărul de telefon trebuie să aibă 10 cifre"
-          className="p-2 border w-full md:w-80"
+          className="p-2 border w-full md:w-80 placeholder:text-xs placeholder:font-light"
         />
         <input
           type="email"
@@ -64,13 +64,13 @@ const StepContactDetails = ({
           value={formData.email}
           onChange={handleInputChange}
           required
-          className="p-2 border w-full md:w-80"
+          className="p-2 border w-full md:w-80 placeholder:text-xs placeholder:font-light"
         />
 
         {/* Multi-option contact method */}
-        <div className="flex flex-col items-start w-full md:w-80">
-          <label className="mb-2">
-            Metoda de contact (selectați una sau mai multe):
+        <div className="flex flex-col items-start w-full md:w-80 text-left">
+          <label className="mb-2 text-xs font-light">
+            Metoda de contact<p>(selectați una sau mai multe):</p>
           </label>
           {contactOptions.map((option) => (
             <label key={option.value} className="flex items-center">
@@ -82,7 +82,9 @@ const StepContactDetails = ({
                 onChange={handleCheckboxChange}
                 className="form-checkbox"
               />
-              <span className="ml-2">{option.label}</span>
+              <span className="ml-2 text-xs font-light p-2">
+                {option.label}
+              </span>
             </label>
           ))}
         </div>
@@ -92,7 +94,7 @@ const StepContactDetails = ({
           placeholder="Mesaj"
           value={formData.message}
           onChange={handleInputChange}
-          className="p-2 border w-full md:w-80"
+          className="p-2 border w-full placeholder:text-xs placeholder:font-light md:w-80"
         />
       </div>
       <div className="w-full md:w-80 mx-auto">
