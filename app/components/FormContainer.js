@@ -104,10 +104,13 @@ const FormContent = () => {
       console.log("Form Data:", formData);
       console.log("Captcha Token Sent:", captchaToken);
 
-      const response = await axios.post("https://daune.pia.ro/api/send-email", {
-        formData,
-        captchaToken,
-      });
+      const response = await axios.post(
+        "https://api.pia.ro/send-email-audiform",
+        {
+          formData,
+          captchaToken,
+        }
+      );
       console.log("Response from server:", response.data);
 
       setFormSubmitted(true);
