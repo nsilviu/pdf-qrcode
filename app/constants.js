@@ -27,7 +27,7 @@ export const sessions = [
     name: "14 Octombrie 2024 - 20 Octombrie 2024",
     cars: [
       { image: "/cars/a3.png", model: "Audi A3" },
-      { image: "/cars/a5.png", model: "Audi A5" },
+      { image: "/cars/q8.png", model: "Audi Q8" },
     ],
   },
   {
@@ -35,7 +35,7 @@ export const sessions = [
     name: "21 Octombrie 2024 - 27 Octombrie 2024",
     cars: [
       { image: "/cars/a3.png", model: "Audi A3" },
-      { image: "/cars/a5.png", model: "Audi A5" },
+      { image: "/cars/q3.png", model: "Audi Q3" },
     ],
   },
   {
@@ -43,7 +43,7 @@ export const sessions = [
     name: "28 Octombrie 2024 - 3 Noiembrie 2024",
     cars: [
       { image: "/cars/a3.png", model: "Audi A3" },
-      { image: "/cars/a5.png", model: "Audi A5" },
+      { image: "/cars/q3sb.png", model: "Audi Q5 Sportback" },
     ],
   },
 ];

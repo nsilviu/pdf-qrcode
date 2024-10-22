@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import FormContainer from "./components/FormContainer";
 import { IconBrandFacebook, IconMail, IconPhone } from "@tabler/icons-react";
+import ConsentDialog from "./components/ConsentDialog";
 
 export default function HomePage() {
   return (
@@ -49,6 +50,7 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+      <ConsentDialog />
     </div>
   );
 }
