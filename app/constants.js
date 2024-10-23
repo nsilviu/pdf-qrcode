@@ -32,7 +32,7 @@ export const sessions = [
   },
   {
     id: 2,
-    name: "28 Octombrie 2024 - 3 Octombrie 2024",
+    name: "28 Octombrie 2024 - 3 Noiembrie 2024",
     cars: [
       { image: "/cars/q3.png", model: "Audi Q3" },
       { image: "/cars/q8.png", model: "Audi Q8" },
