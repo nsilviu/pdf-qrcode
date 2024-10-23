@@ -17,6 +17,9 @@ const StepSession = ({ formData, handleInputChange, onNext }) => {
             }`}
           >
             <h3 className="text-base font-light mb-4">{session.name}</h3>
+            <div className="text-xs font-light p-5 ">
+              Masini disponibile în această perioada
+            </div>
             <div className="flex flex-wrap justify-center gap-4 mb-4">
               {session.cars.map((car, index) => (
                 <div
@@ -44,7 +47,7 @@ const StepSession = ({ formData, handleInputChange, onNext }) => {
               }}
               className="mt-4 w-full flex items-center justify-center px-4 py-2 bg-black text-white font-light hover:bg-white hover:border hover:border-black hover:text-black transition-colors duration-300"
             >
-              Selectează
+              Selectează sesiune
             </button>
           </div>
         ))}
