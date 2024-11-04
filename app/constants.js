@@ -22,14 +22,14 @@ export const brands = [
 ];
 
 export const sessions = [
-  {
-    id: 1,
-    name: "21 Octombrie 2024 - 27 Octombrie 2024",
-    cars: [
-      { image: "/cars/a3.png", model: "Audi A3" },
-      { image: "/cars/q8.png", model: "Audi Q8" },
-    ],
-  },
+  // {
+  //   id: 1,
+  //   name: "21 Octombrie 2024 - 27 Octombrie 2024",
+  //   cars: [
+  //     { image: "/cars/a3.png", model: "Audi A3" },
+  //     { image: "/cars/q8.png", model: "Audi Q8" },
+  //   ],
+  // },
   {
     id: 2,
     name: "28 Octombrie 2024 - 3 Noiembrie 2024",
@@ -46,6 +46,22 @@ export const sessions = [
   //     { image: "/cars/q3sb.png", model: "Audi Q5 Sportback" },
   //   ],
   // },
+  {
+    id: 2,
+    name: "4 Noiembrie 2024 - 10 Noiembrie 2024",
+    cars: [
+      { image: "/cars/a3.png", model: "Audi A3" },
+      { image: "/cars/q3.png", model: "Audi Q3" },
+    ],
+  },
+  {
+    id: 2,
+    name: "11 Noiembrie 2024 - 17 Noiembrie 2024",
+    cars: [
+      { image: "/cars/a3.png", model: "Audi A3" },
+      { image: "/cars/q3.png", model: "Audi Q3" },
+    ],
+  },
 ];
 
 export const dealerships = [
