@@ -1,5 +1,6 @@
 import "./globals.css";
 import ConsentDialog from "./components/ConsentDialog";
+import Script from "next/script";
 
 export const metadata = {
   title: "Audi. Perfect sincronizat cu tine",
@@ -10,8 +11,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* This MUST come before the GTM script */}
-        <script
+        <Script
+          id="gtm-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -28,8 +30,9 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* Then your GTM script */}
-        <script
+        <Script
+          id="gtm-script"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
