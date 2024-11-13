@@ -1,68 +1,60 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
+// Import a cookie handling library (e.g., js-cookie)
+import Cookies from "js-cookie";
+
+const COOKIE_NAME = "cookies_consent"; // Must match COOKIE_NAME in GTM template
+
 const ConsentDialog = () => {
   const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookieConsent");
-    console.log("Current cookie consent status:", consent);
+    // Check for stored consent in the cookie
+    const consentCookie = Cookies.get(COOKIE_NAME);
+    console.log("Current cookie consent status:", consentCookie);
 
-    if (consent) {
-      // Update consent based on stored value
-      updateConsentStatus(consent);
+    if (consentCookie) {
+      // Consent cookie exists, no need to show the dialog
+      setShowDialog(false);
     } else {
       // Show consent dialog if no consent is stored
       setShowDialog(true);
     }
   }, []);
 
-  const updateConsentStatus = (consentStatus) => {
-    try {
-      if (window.gtag) {
-        window.gtag("consent", "update", {
-          ad_storage: consentStatus === "accepted" ? "granted" : "denied",
-          analytics_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          functionality_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          personalization_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          security_storage: "granted",
-        });
-      } else {
-        // Queue the consent update if gtag is not available yet
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push(function () {
-          window.gtag("consent", "update", {
-            ad_storage: consentStatus === "accepted" ? "granted" : "denied",
-            analytics_storage:
-              consentStatus === "accepted" ? "granted" : "denied",
-            functionality_storage:
-              consentStatus === "accepted" ? "granted" : "denied",
-            personalization_storage:
-              consentStatus === "accepted" ? "granted" : "denied",
-            security_storage: "granted",
-          });
-        });
-      }
-    } catch (error) {
-      console.error("Error updating consent status:", error);
-    }
-  };
-
   const handleAccept = () => {
-    localStorage.setItem("cookieConsent", "accepted");
-    console.log("Cookie consent updated to:", "accepted");
+    // Create consent object with all consent types granted
+    const consentObject = {
+      ad_storage: "granted",
+      analytics_storage: "granted",
+      functionality_storage: "granted",
+      personalization_storage: "granted",
+      security_storage: "granted",
+    };
+
+    // Store consent object as JSON string in the cookie
+    Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), { expires: 365 });
+
+    console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
-    updateConsentStatus("accepted");
   };
 
   const handleDecline = () => {
-    localStorage.setItem("cookieConsent", "declined");
-    console.log("Cookie consent updated to:", "declined");
+    // Create consent object with all consent types denied
+    const consentObject = {
+      ad_storage: "denied",
+      analytics_storage: "denied",
+      functionality_storage: "denied",
+      personalization_storage: "denied",
+      security_storage: "granted", // Security storage is typically granted
+    };
+
+    // Store consent object as JSON string in the cookie
+    Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), { expires: 365 });
+
+    console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
-    updateConsentStatus("declined");
   };
 
   if (!showDialog) return null;
