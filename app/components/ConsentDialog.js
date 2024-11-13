@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-// Import cookie handling library if needed
-import Cookies from "js-cookie";
+import Cookies from "js-cookie"; // Ensure js-cookie is installed and imported
 
 const COOKIE_NAME = "cookies_consent"; // Must match COOKIE_NAME in GTM template
 
@@ -14,26 +13,13 @@ const ConsentDialog = () => {
     console.log("Current cookie consent status:", consentCookie);
 
     if (consentCookie) {
-      // Consent cookie exists, update consent
-      const consentObject = JSON.parse(consentCookie);
-      updateConsentStatus(consentObject);
+      // Consent cookie exists, no need to show the dialog
+      setShowDialog(false);
     } else {
       // Show consent dialog if no consent is stored
       setShowDialog(true);
     }
   }, []);
-
-  const updateConsentStatus = (consentObject) => {
-    if (window.gtag) {
-      window.gtag("consent", "update", consentObject);
-    } else {
-      // If gtag is not available, queue the command
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(function () {
-        window.gtag("consent", "update", consentObject);
-      });
-    }
-  };
 
   const handleAccept = () => {
     // Create consent object with all consent types granted
@@ -45,14 +31,16 @@ const ConsentDialog = () => {
       security_storage: "granted",
     };
 
-    // Store consent object as JSON string in the cookie
-    Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), { expires: 365 });
+    // Store consent object as JSON string in the cookie with appropriate attributes
+    Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), {
+      expires: 365, // Cookie expires in 365 days
+      path: "/", // Cookie accessible throughout the site
+      sameSite: "None", // Allows cross-site cookie access
+      secure: true, // Cookie only sent over HTTPS
+    });
 
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
-
-    // Update consent using gtag
-    updateConsentStatus(consentObject);
   };
 
   const handleDecline = () => {
@@ -65,14 +53,16 @@ const ConsentDialog = () => {
       security_storage: "granted", // Security storage is typically granted
     };
 
-    // Store consent object as JSON string in the cookie
-    Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), { expires: 365 });
+    // Store consent object as JSON string in the cookie with appropriate attributes
+    Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), {
+      expires: 365,
+      path: "/",
+      sameSite: "None",
+      secure: true,
+    });
 
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
-
-    // Update consent using gtag
-    updateConsentStatus(consentObject);
   };
 
   if (!showDialog) return null;
