@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-
-// Import a cookie handling library (e.g., js-cookie)
+// Import cookie handling library if needed
 import Cookies from "js-cookie";
 
 const COOKIE_NAME = "cookies_consent"; // Must match COOKIE_NAME in GTM template
@@ -15,13 +14,26 @@ const ConsentDialog = () => {
     console.log("Current cookie consent status:", consentCookie);
 
     if (consentCookie) {
-      // Consent cookie exists, no need to show the dialog
-      setShowDialog(false);
+      // Consent cookie exists, update consent
+      const consentObject = JSON.parse(consentCookie);
+      updateConsentStatus(consentObject);
     } else {
       // Show consent dialog if no consent is stored
       setShowDialog(true);
     }
   }, []);
+
+  const updateConsentStatus = (consentObject) => {
+    if (window.gtag) {
+      window.gtag("consent", "update", consentObject);
+    } else {
+      // If gtag is not available, queue the command
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(function () {
+        window.gtag("consent", "update", consentObject);
+      });
+    }
+  };
 
   const handleAccept = () => {
     // Create consent object with all consent types granted
@@ -38,6 +50,9 @@ const ConsentDialog = () => {
 
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
+
+    // Update consent using gtag
+    updateConsentStatus(consentObject);
   };
 
   const handleDecline = () => {
@@ -55,6 +70,9 @@ const ConsentDialog = () => {
 
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
+
+    // Update consent using gtag
+    updateConsentStatus(consentObject);
   };
 
   if (!showDialog) return null;
