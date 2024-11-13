@@ -10,11 +10,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Add this consent initialization BEFORE the GTM script */}
+        {/* This MUST come before the GTM script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Initialize dataLayer with default consent state
               window.dataLayer = window.dataLayer || [];
               window.dataLayer.push({
                 'event': 'default_consent',
@@ -29,7 +28,7 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* Your existing GTM script should come after */}
+        {/* Then your GTM script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
