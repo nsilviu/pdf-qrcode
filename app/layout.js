@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Set default consent using gtag */}
+        {/* Set default consent using gtag before GTM loads */}
         <Script
           id="gtm-init"
           strategy="beforeInteractive"
@@ -19,6 +19,8 @@ export default function RootLayout({ children }) {
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
+
+              // Set default consent to 'denied'
               gtag('consent', 'default', {
                 'ad_storage': 'denied',
                 'analytics_storage': 'denied',
@@ -30,7 +32,7 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* Load GTM */}
+        {/* Load GTM after setting default consent */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -49,7 +51,7 @@ export default function RootLayout({ children }) {
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-NMHG5MNP"
+            src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}

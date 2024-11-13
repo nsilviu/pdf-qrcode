@@ -12,13 +12,13 @@ const ConsentDialog = () => {
       // Update consent based on stored value
       updateConsentStatus(consent);
     } else {
+      // Show consent dialog if no consent is stored
       setShowDialog(true);
     }
   }, []);
 
   const updateConsentStatus = (consentStatus) => {
     try {
-      // Use gtag to update consent
       if (window.gtag) {
         window.gtag("consent", "update", {
           ad_storage: consentStatus === "accepted" ? "granted" : "denied",
@@ -31,9 +31,9 @@ const ConsentDialog = () => {
           security_storage: "granted",
         });
       } else {
-        // If gtag is not yet available, push to dataLayer
+        // Queue the consent update if gtag is not available yet
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push(() => {
+        window.dataLayer.push(function () {
           window.gtag("consent", "update", {
             ad_storage: consentStatus === "accepted" ? "granted" : "denied",
             analytics_storage:
