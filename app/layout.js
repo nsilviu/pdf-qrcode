@@ -10,32 +10,34 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Google Tag Manager */}
+        {/* Add this consent initialization BEFORE the GTM script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Define dataLayer
+              // Initialize dataLayer with default consent state
               window.dataLayer = window.dataLayer || [];
-              // Set initial consent state
               window.dataLayer.push({
+                'event': 'default_consent',
                 'consent_default': 'denied',
-                'consent': {
-                  'ad_storage': 'denied',
-                  'analytics_storage': 'denied',
-                  'functionality_storage': 'denied',
-                  'personalization_storage': 'denied',
-                  'security_storage': 'granted'
-                }
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'functionality_storage': 'denied',
+                'personalization_storage': 'denied',
+                'security_storage': 'granted'
               });
-              (function(w,d,s,l,i){
-                w[l]=w[l]||[];
-                w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-                j.async=true;
-                j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-NMHG5MNP');
+            `,
+          }}
+        />
+
+        {/* Your existing GTM script should come after */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');
             `,
           }}
         />
