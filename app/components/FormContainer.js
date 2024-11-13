@@ -7,7 +7,7 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import StepProgressBar from "./StepProgressBar";
 import StepContactDetails from "./StepContactDetails"; // Step 3
 import StepStart from "./StepStart"; // Step 0
-import StepSession from "./StepSession"; // Step 1
+import StepModelSelection from "./StepModelSelection"; // Step 1
 import Image from "next/image";
 
 // Dynamically import the GoogleReCaptchaProvider with SSR disabled
@@ -32,7 +32,8 @@ const initialFormData = {
   message: "",
   contactMethod: [], // Initialize as an empty array for multiple options
   consent: false,
-  session: "", // Added session field for audiform.pia.ro
+  session: "",
+  selectedModel: "", // Added session field for audiform.pia.ro
 };
 
 const FormContent = () => {
@@ -87,7 +88,7 @@ const FormContent = () => {
     ];
 
     // Include 'session' as a required field for 'audiform.pia.ro'
-    requiredFields.push("session");
+    requiredFields.push("selectedModel");
 
     const errors = {};
 
@@ -174,7 +175,7 @@ const FormContent = () => {
         return <StepStart onNext={handleNext} />;
       case 1:
         return (
-          <StepSession
+          <StepModelSelection
             formData={formData}
             handleInputChange={handleInputChange}
             onNext={handleNext}

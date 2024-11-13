@@ -20,6 +20,44 @@ export const brands = [
     logo: "/logos/audi.png",
   },
 ];
+export const carModels = [
+  {
+    id: 1,
+    model: "A3 Limuzina S Line 35 TFSI",
+    image: "/cars/a3.png",
+  },
+
+  {
+    id: 3,
+    model: "Q6 e-tron",
+    image: "/cars/q6.png",
+  },
+  {
+    id: 4,
+    model: "Q3 Advanced 35 TFSI",
+    image: "/cars/q3-advanced.png",
+  },
+  {
+    id: 5,
+    model: "Q3 Sportback S Line 40 TFSI quattro",
+    image: "/cars/q3-sportback.png",
+  },
+  {
+    id: 6,
+    model: "Q5 Sportback Advanced 45 TFSI quattro",
+    image: "/cars/q5.png",
+  },
+  {
+    id: 7,
+    model: "Q7 S Line 55 TFSI e quattro",
+    image: "/cars/q7.png",
+  },
+  {
+    id: 9,
+    model: "Q8 55 TFSI quattro",
+    image: "/cars/q8.png",
+  },
+];
 
 export const sessions = [
   // {
