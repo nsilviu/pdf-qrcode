@@ -44,8 +44,8 @@ const ConsentDialog = () => {
   const updateConsentStatus = (consentStatus) => {
     try {
       window.dataLayer = window.dataLayer || [];
-      console.log("Updating consent status to:", consentStatus);
 
+      // First, update the consent state
       window.dataLayer.push({
         event: "consent_update",
         consent_default: consentStatus === "accepted" ? "granted" : "denied",
@@ -57,6 +57,20 @@ const ConsentDialog = () => {
           consentStatus === "accepted" ? "granted" : "denied",
         security_storage: "granted",
       });
+
+      // Then, update the consent configuration (this is important!)
+      if (window.gtag) {
+        gtag("consent", "update", {
+          ad_storage: consentStatus === "accepted" ? "granted" : "denied",
+          analytics_storage:
+            consentStatus === "accepted" ? "granted" : "denied",
+          functionality_storage:
+            consentStatus === "accepted" ? "granted" : "denied",
+          personalization_storage:
+            consentStatus === "accepted" ? "granted" : "denied",
+          security_storage: "granted",
+        });
+      }
     } catch (error) {
       console.error("Error updating consent status:", error);
     }
