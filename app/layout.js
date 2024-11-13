@@ -1,5 +1,10 @@
 import "./globals.css";
-import GoogleAnalytics from "./components/GoogleAnalytics";
+
+import dynamic from "next/dynamic";
+
+const GoogleAnalytics = dynamic(() => import("./components/GoogleAnalytics"), {
+  ssr: false,
+});
 
 export const metadata = {
   title: "Audi. Perfect sincronizat cu tine",
