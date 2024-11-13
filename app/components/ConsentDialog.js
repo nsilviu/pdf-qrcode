@@ -4,63 +4,23 @@ import React, { useState, useEffect } from "react";
 const ConsentDialog = () => {
   const [showDialog, setShowDialog] = useState(false);
 
-  const logDataLayerEvents = () => {
-    console.log(
-      "Current DataLayer events:",
-      window.dataLayer?.map((item) => item.event).filter(Boolean)
-    );
-  };
-
   useEffect(() => {
-    // First, always push the default consent state
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "default_consent",
-      consent_default: "denied",
-      ad_storage: "denied",
-      analytics_storage: "denied",
-      functionality_storage: "denied",
-      personalization_storage: "denied",
-      security_storage: "granted",
-    });
-
-    // Then check for stored consent and update if necessary
     const consent = localStorage.getItem("cookieConsent");
     console.log("Current cookie consent status:", consent);
 
-    // Add a small delay to ensure default consent is processed first
     if (consent) {
-      setTimeout(() => {
-        updateConsentStatus(consent);
-      }, 100);
+      // Update consent based on stored value
+      updateConsentStatus(consent);
     } else {
       setShowDialog(true);
     }
-
-    const interval = setInterval(logDataLayerEvents, 1000);
-    return () => clearInterval(interval);
   }, []);
 
   const updateConsentStatus = (consentStatus) => {
     try {
-      window.dataLayer = window.dataLayer || [];
-
-      // First, update the consent state
-      window.dataLayer.push({
-        event: "consent_update",
-        consent_default: consentStatus === "accepted" ? "granted" : "denied",
-        ad_storage: consentStatus === "accepted" ? "granted" : "denied",
-        analytics_storage: consentStatus === "accepted" ? "granted" : "denied",
-        functionality_storage:
-          consentStatus === "accepted" ? "granted" : "denied",
-        personalization_storage:
-          consentStatus === "accepted" ? "granted" : "denied",
-        security_storage: "granted",
-      });
-
-      // Then, update the consent configuration (this is important!)
+      // Use gtag to update consent
       if (window.gtag) {
-        gtag("consent", "update", {
+        window.gtag("consent", "update", {
           ad_storage: consentStatus === "accepted" ? "granted" : "denied",
           analytics_storage:
             consentStatus === "accepted" ? "granted" : "denied",
@@ -69,6 +29,21 @@ const ConsentDialog = () => {
           personalization_storage:
             consentStatus === "accepted" ? "granted" : "denied",
           security_storage: "granted",
+        });
+      } else {
+        // If gtag is not yet available, push to dataLayer
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(() => {
+          window.gtag("consent", "update", {
+            ad_storage: consentStatus === "accepted" ? "granted" : "denied",
+            analytics_storage:
+              consentStatus === "accepted" ? "granted" : "denied",
+            functionality_storage:
+              consentStatus === "accepted" ? "granted" : "denied",
+            personalization_storage:
+              consentStatus === "accepted" ? "granted" : "denied",
+            security_storage: "granted",
+          });
         });
       }
     } catch (error) {

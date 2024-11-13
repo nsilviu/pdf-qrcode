@@ -11,15 +11,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Set default consent using gtag */}
         <Script
           id="gtm-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
-              window.dataLayer.push({
-                'event': 'default_consent',
-                'consent_default': 'denied',
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
                 'ad_storage': 'denied',
                 'analytics_storage': 'denied',
                 'functionality_storage': 'denied',
@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
           }}
         />
 
+        {/* Load GTM */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
