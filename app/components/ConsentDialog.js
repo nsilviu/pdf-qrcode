@@ -4,51 +4,59 @@ import React, { useState, useEffect } from "react";
 const ConsentDialog = () => {
   const [showDialog, setShowDialog] = useState(false);
 
+  const logDataLayerEvents = () => {
+    console.log(
+      "Current DataLayer events:",
+      window.dataLayer?.map((item) => item.event).filter(Boolean)
+    );
+  };
+
   useEffect(() => {
+    // First, always push the default consent state
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "default_consent",
+      consent_default: "denied",
+      ad_storage: "denied",
+      analytics_storage: "denied",
+      functionality_storage: "denied",
+      personalization_storage: "denied",
+      security_storage: "granted",
+    });
+
+    // Then check for stored consent and update if necessary
     const consent = localStorage.getItem("cookieConsent");
     console.log("Current cookie consent status:", consent);
-    console.log("All localStorage items:", { ...localStorage });
 
-    if (!consent) {
-      setShowDialog(true);
+    // Add a small delay to ensure default consent is processed first
+    if (consent) {
+      setTimeout(() => {
+        updateConsentStatus(consent);
+      }, 100);
     } else {
-      updateConsentStatus(consent);
+      setShowDialog(true);
     }
+
+    const interval = setInterval(logDataLayerEvents, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const updateConsentStatus = (consentStatus) => {
     try {
       window.dataLayer = window.dataLayer || [];
+      console.log("Updating consent status to:", consentStatus);
 
-      // Push consent update using correct Consent Mode v2 format
       window.dataLayer.push({
         event: "consent_update",
         consent_default: consentStatus === "accepted" ? "granted" : "denied",
-        consent_update: {
-          ad_storage: consentStatus === "accepted" ? "granted" : "denied",
-          analytics_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          functionality_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          personalization_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          security_storage: "granted",
-        },
+        ad_storage: consentStatus === "accepted" ? "granted" : "denied",
+        analytics_storage: consentStatus === "accepted" ? "granted" : "denied",
+        functionality_storage:
+          consentStatus === "accepted" ? "granted" : "denied",
+        personalization_storage:
+          consentStatus === "accepted" ? "granted" : "denied",
+        security_storage: "granted",
       });
-
-      // Update GTM consent state
-      if (window.gtag) {
-        gtag("consent", "update", {
-          ad_storage: consentStatus === "accepted" ? "granted" : "denied",
-          analytics_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          functionality_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          personalization_storage:
-            consentStatus === "accepted" ? "granted" : "denied",
-          security_storage: "granted",
-        });
-      }
     } catch (error) {
       console.error("Error updating consent status:", error);
     }
