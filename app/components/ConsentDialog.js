@@ -58,6 +58,8 @@ const ConsentDialog = () => {
       functionality_storage: "granted",
       personalization_storage: "granted",
       security_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
     };
 
     handleConsent(consentObject);
@@ -70,6 +72,8 @@ const ConsentDialog = () => {
       functionality_storage: "denied",
       personalization_storage: "denied",
       security_storage: "granted", // Security storage is typically granted
+      ad_user_data: "denied",
+      ad_personalization: "denied",
     };
 
     handleConsent(consentObject);
