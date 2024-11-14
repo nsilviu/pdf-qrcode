@@ -1,14 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie"; // Import js-cookie
+import Cookies from "js-cookie"; // Import js-cookie for cookie handling
 
-const COOKIE_NAME = "cookies_consent"; // Must match COOKIE_NAME in your GTM template
+const COOKIE_NAME = "cookies_consent"; // Must match COOKIE_NAME in your GTM custom template
 
 const ConsentDialog = () => {
   const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
-    // Check for stored consent in the cookie
+    // Check if the consent cookie exists
     const consentCookie = Cookies.get(COOKIE_NAME);
     console.log("Current cookie consent status:", consentCookie);
 
@@ -16,13 +16,13 @@ const ConsentDialog = () => {
       // Consent cookie exists, no need to show the dialog
       setShowDialog(false);
     } else {
-      // Show consent dialog if no consent is stored
+      // Show the consent dialog if no consent is stored
       setShowDialog(true);
     }
   }, []);
 
   const handleAccept = () => {
-    // Create consent object with all consent types granted
+    // Create a consent object with all consent types granted
     const consentObject = {
       ad_storage: "granted",
       analytics_storage: "granted",
@@ -31,7 +31,7 @@ const ConsentDialog = () => {
       security_storage: "granted",
     };
 
-    // Store consent object as JSON string in the cookie
+    // Store the consent object as a JSON string in the cookie
     Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), {
       expires: 365, // Cookie expires in 365 days
       path: "/", // Cookie accessible throughout the site
@@ -41,10 +41,16 @@ const ConsentDialog = () => {
 
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
+
+    // Push a custom event to the dataLayer after a slight delay
+    setTimeout(() => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "consent_updated" });
+    }, 50); // Delay of 50 milliseconds to ensure the cookie is set
   };
 
   const handleDecline = () => {
-    // Create consent object with all consent types denied
+    // Create a consent object with all consent types denied
     const consentObject = {
       ad_storage: "denied",
       analytics_storage: "denied",
@@ -53,7 +59,7 @@ const ConsentDialog = () => {
       security_storage: "granted", // Security storage is typically granted
     };
 
-    // Store consent object as JSON string in the cookie
+    // Store the consent object as a JSON string in the cookie
     Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), {
       expires: 365,
       path: "/",
@@ -63,13 +69,19 @@ const ConsentDialog = () => {
 
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
+
+    // Push a custom event to the dataLayer after a slight delay
+    setTimeout(() => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "consent_updated" });
+    }, 50); // Delay of 50 milliseconds to ensure the cookie is set
   };
 
   if (!showDialog) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md border-t z-50">
-      <div className="max-w-screen-xl mx-auto flex justify-between align-middle items-center">
+      <div className="max-w-screen-xl mx-auto flex justify-between items-center">
         <p className="text-xs font-light text-left">
           Folosim cookie-uri pentru a personaliza conținutul, pentru a oferi
           funcționalități social media și a analiza traficul.
