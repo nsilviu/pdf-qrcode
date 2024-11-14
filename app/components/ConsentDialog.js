@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie"; // Import js-cookie for cookie handling
 
-const COOKIE_NAME = "cookies_consent"; // Must match COOKIE_NAME in your GTM custom template
+const COOKIE_NAME = "cookies_consent"; // Name of the consent cookie
 
 const ConsentDialog = () => {
   const [showDialog, setShowDialog] = useState(false);
@@ -13,13 +13,27 @@ const ConsentDialog = () => {
     console.log("Current cookie consent status:", consentCookie);
 
     if (consentCookie) {
-      // Consent cookie exists, no need to show the dialog
+      // Consent cookie exists, update consent status
+      const consentObject = JSON.parse(consentCookie);
+      updateConsentStatus(consentObject);
       setShowDialog(false);
     } else {
       // Show the consent dialog if no consent is stored
       setShowDialog(true);
     }
   }, []);
+
+  const updateConsentStatus = (consentObject) => {
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", consentObject);
+    } else {
+      // If gtag is not available, queue the command
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(() => {
+        window.gtag("consent", "update", consentObject);
+      });
+    }
+  };
 
   const handleConsent = (consentObject) => {
     // Store the consent object as a JSON string in the cookie
@@ -33,16 +47,11 @@ const ConsentDialog = () => {
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
 
-    // Push a custom event to the dataLayer with consent data
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "consent_updated",
-      consentData: consentObject,
-    });
+    // Update consent using gtag
+    updateConsentStatus(consentObject);
   };
 
   const handleAccept = () => {
-    // Create a consent object with all consent types granted
     const consentObject = {
       ad_storage: "granted",
       analytics_storage: "granted",
@@ -55,7 +64,6 @@ const ConsentDialog = () => {
   };
 
   const handleDecline = () => {
-    // Create a consent object with all consent types denied
     const consentObject = {
       ad_storage: "denied",
       analytics_storage: "denied",
