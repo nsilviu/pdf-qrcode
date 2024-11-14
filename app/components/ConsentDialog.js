@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie"; // Ensure js-cookie is installed and imported
+import Cookies from "js-cookie"; // Import js-cookie
 
-const COOKIE_NAME = "cookies_consent"; // Must match COOKIE_NAME in GTM template
+const COOKIE_NAME = "cookies_consent"; // Must match COOKIE_NAME in your GTM template
 
 const ConsentDialog = () => {
   const [showDialog, setShowDialog] = useState(false);
@@ -31,7 +31,7 @@ const ConsentDialog = () => {
       security_storage: "granted",
     };
 
-    // Store consent object as JSON string in the cookie with appropriate attributes
+    // Store consent object as JSON string in the cookie
     Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), {
       expires: 365, // Cookie expires in 365 days
       path: "/", // Cookie accessible throughout the site
@@ -53,7 +53,7 @@ const ConsentDialog = () => {
       security_storage: "granted", // Security storage is typically granted
     };
 
-    // Store consent object as JSON string in the cookie with appropriate attributes
+    // Store consent object as JSON string in the cookie
     Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), {
       expires: 365,
       path: "/",
