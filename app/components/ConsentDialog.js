@@ -21,16 +21,7 @@ const ConsentDialog = () => {
     }
   }, []);
 
-  const handleAccept = () => {
-    // Create a consent object with all consent types granted
-    const consentObject = {
-      ad_storage: "granted",
-      analytics_storage: "granted",
-      functionality_storage: "granted",
-      personalization_storage: "granted",
-      security_storage: "granted",
-    };
-
+  const handleConsent = (consentObject) => {
     // Store the consent object as a JSON string in the cookie
     Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), {
       expires: 365, // Cookie expires in 365 days
@@ -42,11 +33,25 @@ const ConsentDialog = () => {
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
 
-    // Push a custom event to the dataLayer after a slight delay
-    setTimeout(() => {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "consent_updated" });
-    }, 50); // Delay of 50 milliseconds to ensure the cookie is set
+    // Push a custom event to the dataLayer with consent data
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "consent_updated",
+      consentData: consentObject,
+    });
+  };
+
+  const handleAccept = () => {
+    // Create a consent object with all consent types granted
+    const consentObject = {
+      ad_storage: "granted",
+      analytics_storage: "granted",
+      functionality_storage: "granted",
+      personalization_storage: "granted",
+      security_storage: "granted",
+    };
+
+    handleConsent(consentObject);
   };
 
   const handleDecline = () => {
@@ -59,22 +64,7 @@ const ConsentDialog = () => {
       security_storage: "granted", // Security storage is typically granted
     };
 
-    // Store the consent object as a JSON string in the cookie
-    Cookies.set(COOKIE_NAME, JSON.stringify(consentObject), {
-      expires: 365,
-      path: "/",
-      sameSite: "None",
-      secure: true,
-    });
-
-    console.log("Cookie consent updated to:", consentObject);
-    setShowDialog(false);
-
-    // Push a custom event to the dataLayer after a slight delay
-    setTimeout(() => {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "consent_updated" });
-    }, 50); // Delay of 50 milliseconds to ensure the cookie is set
+    handleConsent(consentObject);
   };
 
   if (!showDialog) return null;
