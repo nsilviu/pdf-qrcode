@@ -24,15 +24,29 @@ const ConsentDialog = () => {
   }, []);
 
   const updateConsentStatus = (consentObject) => {
+    window.dataLayer = window.dataLayer || [];
+
+    // Step 1: Update consent state using gtag
     if (typeof window.gtag === "function") {
       window.gtag("consent", "update", consentObject);
     } else {
       // If gtag is not available, queue the command
-      window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(() => {
         window.gtag("consent", "update", consentObject);
       });
     }
+
+    // Step 2: Push a separate event to confirm the final consent state
+    window.dataLayer.push({
+      event: "gtm_consent_update",
+      ad_storage: consentObject.ad_storage,
+      analytics_storage: consentObject.analytics_storage,
+      ad_user_data: consentObject.ad_user_data,
+      ad_personalization: consentObject.ad_personalization,
+      functionality_storage: consentObject.functionality_storage,
+      personalization_storage: consentObject.personalization_storage,
+      security_storage: consentObject.security_storage,
+    });
   };
 
   const handleConsent = (consentObject) => {
@@ -47,7 +61,7 @@ const ConsentDialog = () => {
     console.log("Cookie consent updated to:", consentObject);
     setShowDialog(false);
 
-    // Update consent using gtag
+    // Update consent using gtag and push the final consent event
     updateConsentStatus(consentObject);
   };
 
