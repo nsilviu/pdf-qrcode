@@ -16,7 +16,7 @@ const StepModelSelection = ({ formData, handleInputChange, onNext }) => {
                 target: { name: "selectedModel", value: car.model },
               });
             }}
-            className={`w-full max-w-xs bg-white p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 ${
+            className={`w-full max-w-xs flex flex-col align-middle items-center bg-white p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 ${
               formData.selectedModel === car.model
                 ? "border-2 border-[#f50537]"
                 : ""
