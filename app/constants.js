@@ -37,14 +37,10 @@ export const carModels = [
     model: "Q3 Advanced 35 TFSI",
     image: "/cars/q3-advanced.png",
   },
-  {
-    id: 5,
-    model: "Q3 Sportback S Line 40 TFSI quattro",
-    image: "/cars/q3-sportback.png",
-  },
+
   {
     id: 6,
-    model: "Q5 Sportback Advanced 45 TFSI quattro",
+    model: "Q5 Sportback Advanced 40 TDI quattro",
     image: "/cars/q5.png",
   },
   {
