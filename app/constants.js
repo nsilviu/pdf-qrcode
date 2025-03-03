@@ -21,16 +21,21 @@ export const brands = [
   },
 ];
 export const carModels = [
-  {
-    id: 1,
-    model: "A3 Limuzina S Line 35 TFSI",
-    image: "/cars/a3.png",
-  },
+  // {
+  //   id: 1,
+  //   model: "A3 Limuzina S Line 35 TFSI",
+  //   image: "/cars/a3.png",
+  // },
 
+  // {
+  //   id: 3,
+  //   model: "Q6 e-tron",
+  //   image: "/cars/q6.png",
+  // },
   {
     id: 3,
-    model: "Q6 e-tron",
-    image: "/cars/q6.png",
+    model: "Noul A5 35 TFSI",
+    image: "/cars/a5.png",
   },
   {
     id: 4,
@@ -38,21 +43,21 @@ export const carModels = [
     image: "/cars/q3-advanced.png",
   },
 
-  {
-    id: 6,
-    model: "Q5 Sportback Advanced 40 TDI quattro",
-    image: "/cars/q5.png",
-  },
+  // {
+  //   id: 6,
+  //   model: "Q5 Sportback Advanced 40 TDI quattro",
+  //   image: "/cars/q5.png",
+  // },
   {
     id: 7,
     model: "Q7 S Line 55 TFSI e quattro",
     image: "/cars/q7.png",
   },
-  {
-    id: 9,
-    model: "Q8 55 TFSI quattro",
-    image: "/cars/q8.png",
-  },
+  // {
+  //   id: 9,
+  //   model: "Q8 55 TFSI quattro",
+  //   image: "/cars/q8.png",
+  // },
 ];
 
 export const sessions = [
