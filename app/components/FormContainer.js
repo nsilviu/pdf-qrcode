@@ -221,10 +221,10 @@ const FormContent = () => {
             Punct test-drive Audi la ParkLake
           </h1>
           <h1 className="text-xs font-light text-left">
-            Luni - Vineri 15:00 - 19:00
+            Luni - Vineri 13:00 - 19:00
           </h1>
           <h1 className="text-xs font-light text-left">
-            Sâmbătă - Duminică 12:00 - 16:00
+            Sâmbătă - Duminică 10:00 - 16:00
           </h1>
         </div>
       </div>
