@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen bg-gray-50">
       {/* Form container */}
-      <div className="flex flex-col items-center justify-center text-center bg-black px-5 pt-5">
+      <div className="flex flex-col items-center justify-center text-center bg-[#273773] px-5 pt-5">
         <a href="#">
           <Image
             src="/logos/pialogo.png"

@@ -37,7 +37,7 @@ const initialFormData = {
 };
 
 const FormContent = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(initialFormData);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
@@ -201,85 +201,18 @@ const FormContent = () => {
       {/* Logo and header */}
       <div className="left-0 w-full overflow-hidden">
         <div className="relative w-full h-[100px] ">
-          <div className="absolute inset-0 transform mb-10">
-            <Image
-              src="/logos/audi_light.svg" // Path to your logo
-              alt="Audi Logo"
-              layout="fill"
-            />
-          </div>
+          <div className="absolute inset-0 transform mb-10"></div>
         </div>
-        <div className="text-sm px-10 mb-5 text-left">
+        <div className="text-sm px-10 mb-5 text-center">
           <h1
             className="text-4xl font-bold font-audi"
             style={{ fontWeight: 700 }}
           >
-            Audi
-          </h1>
-          <h1 className="font-audi">Perfect sincronizat cu tine.</h1>
-          <h1 className="text-xs font-light text-left mt-10">
-            Punct test-drive Audi la ParkLake
-          </h1>
-          <h1 className="text-xs font-light text-left">
-            Luni - Vineri 13:00 - 19:00
-          </h1>
-          <h1 className="text-xs font-light text-left">
-            Sâmbătă - Duminică 10:00 - 16:00
+            Raiffeisen Leasing
           </h1>
         </div>
       </div>
-
-      <StepProgressBar step={formSubmitted ? 3 : step} />
-
-      {formSubmitted ? (
-        <div className="text-center p-5">
-          <h2 className="text-xl font-bold">
-            Formularul a fost trimis cu succes.
-          </h2>
-          <p>
-            Vă mulțumim! În cel mai scurt timp veți fi contactat de un coleg
-            specialist vânzări.
-          </p>
-        </div>
-      ) : (
-        <form onSubmit={handleFormSubmission}>
-          {renderStep()}
-          <div className="mt-4 flex justify-between">
-            {/* Back button */}
-            {step > 0 ? (
-              <button
-                type="button"
-                onClick={handlePrev}
-                className="px-4 py-2 bg-white m-6 w-28 text-black border border-black hover:bg-black hover:text-white"
-              >
-                Înapoi
-              </button>
-            ) : (
-              <div className="invisible px-4 py-2" />
-            )}
-            {/* Next button */}
-            {step > 0 && step < 2 && (
-              <button
-                type="button"
-                onClick={handleNext}
-                className="px-4 py-2 bg-black m-6 w-28 text-white hover:bg-gray-600"
-              >
-                Înainte
-              </button>
-            )}
-            {/* Submit button */}
-            {step === 2 && (
-              <button
-                type="submit"
-                className="px-4 py-2 bg-[#f50537] m-6 w-28 text-white hover:bg-white hover:text-black hover:border-black hover:border"
-                disabled={loading}
-              >
-                {loading ? "Se trimite..." : "Trimite"}
-              </button>
-            )}
-          </div>
-        </form>
-      )}
+      {renderStep()}
     </div>
   );
 };

@@ -36,11 +36,13 @@ export const carModels = [
     id: 3,
     model: "Noul A5 35 TFSI",
     image: "/cars/a5.png",
+    link: "/pdf/noul-a5.pdf",
   },
   {
     id: 4,
     model: "Q3 Advanced 35 TFSI",
     image: "/cars/q3-advanced.png",
+    link: "/pdf/noul-a5.pdf",
   },
 
   // {
@@ -52,6 +54,7 @@ export const carModels = [
     id: 7,
     model: "Q7 S Line 55 TFSI e quattro",
     image: "/cars/q7.png",
+    link: "/pdf/noul-a5.pdf",
   },
   // {
   //   id: 9,

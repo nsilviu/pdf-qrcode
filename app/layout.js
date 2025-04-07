@@ -3,8 +3,8 @@ import ConsentDialog from "./components/ConsentDialog";
 import Script from "next/script";
 
 export const metadata = {
-  title: "Audi. Perfect sincronizat cu tine",
-  description: "Punct test drive Park Lake",
+  title: "PIA x Raiffeisen - Oferte speciale",
+  description: "Oferte speciale pentru Raiffeisen",
 };
 
 export default function RootLayout({ children }) {
