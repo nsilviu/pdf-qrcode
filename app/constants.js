@@ -21,46 +21,126 @@ export const brands = [
   },
 ];
 export const carModels = [
-  // {
-  //   id: 1,
-  //   model: "A3 Limuzina S Line 35 TFSI",
-  //   image: "/cars/a3.png",
-  // },
-
-  // {
-  //   id: 3,
-  //   model: "Q6 e-tron",
-  //   image: "/cars/q6.png",
-  // },
+  {
+    id: 1,
+    model: "ID.7 Pro Tourer 77 kWh 286 CP",
+    image: "/cars/ID.7 Pro Tourer 77 kWh 286 CP.png",
+    link: "/pdf/ID.7 Pro Tourer 77 kWh 286 CP.pdf",
+  },
+  {
+    id: 2,
+    model: "A5 Limuzina 35 TFSI",
+    image: "/cars/A5 Limuzina 35 TFSI.webp",
+    link: "/pdf/A5 Limuzina 35 TFSI.pdf",
+  },
   {
     id: 3,
-    model: "Noul A5 35 TFSI",
-    image: "/cars/a5.png",
-    link: "/pdf/noul-a5.pdf",
+    model: "A5 Limuzina 40 TFSI quattro",
+    image: "/cars/A5 Limuzina 40 TFSI quattro.webp",
+    link: "/pdf/A5 Limuzina 40 TFSI quattro.pdf",
   },
   {
     id: 4,
-    model: "Q3 Advanced 35 TFSI",
-    image: "/cars/q3-advanced.png",
-    link: "/pdf/noul-a5.pdf",
+    model: "CUPRA Tavascan VZ 77 kWh",
+    image: "/cars/CUPRA Tavascan VZ 77 kWh.jpg",
+    link: "/pdf/CUPRA Tavascan VZ 77 kWh.pdf",
   },
-
-  // {
-  //   id: 6,
-  //   model: "Q5 Sportback Advanced 40 TDI quattro",
-  //   image: "/cars/q5.png",
-  // },
+  {
+    id: 5,
+    model: "CUPRA Terramar VZ 2.0 TSI 4DRIVE",
+    image: "/cars/CUPRA Terramar VZ 2.0 TSI 4DRIVE.jpg",
+    link: "/pdf/CUPRA Terramar VZ 2.0 TSI 4DRIVE.pdf",
+  },
+  {
+    id: 6,
+    model: "CUPRA Terramar VZ1.5 e-HYBRID",
+    image: "/cars/CUPRA Terramar VZ1.5 e-HYBRID.jpg",
+    link: "/pdf/CUPRA Terramar VZ1.5 e-HYBRID.pdf",
+  },
   {
     id: 7,
-    model: "Q7 S Line 55 TFSI e quattro",
-    image: "/cars/q7.png",
-    link: "/pdf/noul-a5.pdf",
+    model: "Noul CUPRA Formentor VZ 1.5 e-HYBRID",
+    image: "/cars/Noul CUPRA Formentor VZ 1.5 e-HYBRID.jpg",
+    link: "/pdf/Noul CUPRA Formentor VZ 1.5 e-HYBRID.pdf",
   },
-  // {
-  //   id: 9,
-  //   model: "Q8 55 TFSI quattro",
-  //   image: "/cars/q8.png",
-  // },
+  {
+    id: 8,
+    model: "Noul CUPRA Formentor VZ 2.0 TSI",
+    image: "/cars/Noul CUPRA Formentor VZ 2.0 TSI.jpg",
+    link: "/pdf/Noul CUPRA Formentor VZ 2.0 TSI.pdf",
+  },
+  {
+    id: 9,
+    model: "Noul Tiguan Life Hybrid 1,5 TSI DSG 204 CP",
+    image: "/cars/Noul Tiguan Life Hybrid 1,5 TSI DSG 204 CP.png",
+    link: "/pdf/Noul Tiguan Life Hybrid 1,5 TSI DSG 204 CP.pdf",
+  },
+  {
+    id: 10,
+    model: "Noul Touareg Elegance V6 TDI 231 CP",
+    image: "/cars/Noul Touareg Elegance V6 TDI 231 CP.png",
+    link: "/pdf/Noul Touareg Elegance V6 TDI 231 CP.pdf",
+  },
+  {
+    id: 11,
+    model: "Noul Touareg R-Line V6 TDI 286 CP",
+    image: "/cars/Noul Touareg R-Line V6 TDI 286 CP.png",
+    link: "/pdf/Noul Touareg R-Line V6 TDI 286 CP.pdf",
+  },
+  {
+    id: 12,
+    model: "Oferta ELROQ 85",
+    image: "/cars/Oferta ELROQ 85.png",
+    link: "/pdf/Oferta ELROQ 85.pdf",
+  },
+  {
+    id: 13,
+    model: "Oferta Kodiaq RS 2.0 TSI DSG 4x4",
+    image: "/cars/Oferta Kodiaq RS 2.0 TSI DSG 4x4.png",
+    link: "/pdf/Oferta Kodiaq RS 2.0 TSI DSG 4x4.pdf",
+  },
+  {
+    id: 14,
+    model: "Oferta Octavia RS 2.0 TSI DSG",
+    image: "/cars/Oferta Octavia RS 2.0 TSI DSG.png",
+    link: "/pdf/Oferta Octavia RS 2.0 TSI DSG.pdf",
+  },
+  {
+    id: 15,
+    model: "Q5 40 TDI quattro",
+    image: "/cars/Q5 40 TDI quattro.webp",
+    link: "/pdf/Q5 40 TDI quattro.pdf",
+  },
+  {
+    id: 16,
+    model: "Q6 e-tron quattro",
+    image: "/cars/Q6 e-tron quattro.webp",
+    link: "/pdf/Q6 e-tron quattro.pdf",
+  },
+  {
+    id: 17,
+    model: "Q7 S line 55 TFSI e quattro 290 kW 394CP",
+    image: "/cars/Q7 S line 55 TFSI e quattro 290 kW 394CP.webp",
+    link: "/pdf/Q7 S line 55 TFSI e quattro 290 kW 394CP.pdf",
+  },
+  {
+    id: 18,
+    model: "Q8 PI 55 TFSI quattro",
+    image: "/cars/Q8 PI 55 TFSI quattro.webp",
+    link: "/pdf/Q8 PI 55 TFSI quattro.pdf",
+  },
+  {
+    id: 19,
+    model: "Tayron Life Hybrid 1,5 TSI DSG 204 CP",
+    image: "/cars/Tayron Life Hybrid 1,5 TSI DSG 204 CP.png",
+    link: "/pdf/Tayron Life Hybrid 1,5 TSI DSG 204 CP.pdf",
+  },
+  {
+    id: 20,
+    model: "Tayron R-Line TSI Hybrid 272 CP",
+    image: "/cars/Tayron R-Line TSI Hybrid 272 CP.png",
+    link: "/pdf/Tayron R-Line TSI Hybrid 272 CP.pdf",
+  },
 ];
 
 export const sessions = [
